@@ -4,10 +4,12 @@
 //  Created by waynewang on 19/4/14.
 //  Copyright (c) 2014 waynewang. All rights reserved.
 //
-
+#pragma warning(push)
+#pragma warning(disable : 4244) // Disable warnings from external toolkit.
 #include "Trilateration.h"
 #include <Eigen/Dense>
 #include <math.h>
+#pragma warning(pop)
 
 bool Trilateration::CalculateLocation2d(const PosAndDistance2dVec& beacons, Pos2d& location)
 {

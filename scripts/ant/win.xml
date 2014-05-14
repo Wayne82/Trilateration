@@ -1,0 +1,10 @@
+<project 
+  name="platform"
+  default="build"
+  basedir="."
+  xmlns:if="ant:if"
+  xmlns:unless="ant:unless">
+
+  <import file="./${compiler}.xml"/>
+ 
+</project>

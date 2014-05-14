@@ -1,0 +1,67 @@
+<project name="Trilateration" 
+		 default="check_ant" 
+		 basedir="."
+		 xmlns:if="ant:if"
+		 xmlns:unless="ant:unless">
+
+	<!-- Properties -->
+	<property name="ant.version.required" value="1.9.2"/>	
+	<property name="config" value="Debug"/>
+
+	<property file="./scripts/ant/${platform}.properties"/>		
+	
+	<property name="platform_compiler" value="${platform}_${compiler}"/>
+	<property name="build.dir" value="${basedir}/build/${platform_compiler}/${arch}/${build.dir.suffix}"/>
+	<property name="bin.dir" value="${build.dir}/bin"/>
+	<property name="output.dir" value="${bin.dir}/${output.dir.suffix}"/>
+
+	<echo message=""/>
+	<echo message="*** Common Settings ***"/>
+	<echo message=""/>
+	<echo message="Platform:      ${platform}"/>
+	<echo message="Compiler:      ${compiler}"/>
+	<echo message="Architecture:  ${arch}"/>
+	<echo message="Configuration: ${config}"/>
+	<echo message="Library Type:  ${libtype}"/>
+	<echo message=""/>
+	<echo message="*** Directory Settings ***"/>
+	<echo message=""/>
+	<echo message="Build Dir:     ${build.dir}"/>
+	<echo message="Output Dir:    ${output.dir}"/>
+	<echo message=""/>	
+	
+	<target name="check_ant">
+		<antversion property="ant.version.running"/>
+		<fail message="FATAL ERROR:  The running Ant version, ${ant.version.running}, is too old. Requires version ${ant.version.required}">
+			<condition>
+				<not>
+					<antversion atleast="${ant.version.required}"/>
+				</not>
+			</condition>
+		</fail>
+	</target>
+	
+  <target name="prep_cmake">
+	<mkdir dir="${output.dir}"/>
+	
+	<exec executable="./scripts/cmake/${prep.script}" failonerror="true">
+	  <env key="T_ROOT_DIR" file="${basedir}"/>
+	  <env key="T_BUILD_DIR" file="${build.dir}"/>
+	  <env key="T_OUTPUT_DIR" file="${bin.dir}"/>
+	  <env key="T_BUILD_CONFIG" value="${config}"/>
+	  <env key="T_BUILD_ARCH" value="${arch}"/>
+	  <env key="T_BUILD_LIBTYPE" value="${libtype}"/>
+	  <env key="T_PLATFORM_COMPILER" value="${platform_compiler}"/>
+	</exec>
+  </target>
+  
+  <target name="prep" depends="prep_cmake"/>
+  
+  <import file="./scripts/ant/${platform}.xml"/>
+  
+  <target name="delete_build"
+		  description="Removes all builds">
+	<delete dir="build"/>
+  </target>
+  
+</project>

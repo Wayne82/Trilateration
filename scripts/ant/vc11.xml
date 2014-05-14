@@ -1,0 +1,32 @@
+<project 
+  name="compiler"
+  default="build"
+  basedir="."
+  xmlns:if="ant:if"
+  xmlns:unless="ant:unless">
+  
+  <property name="msbuild.path" value="${env.windir}/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe"/>
+  
+  <target name="build" depends="prep">
+	<exec dir="${build.dir}"
+		  failonerror="true"
+		  executable="${msbuild.path}">
+	  <arg value="/m"/>
+      <arg value="/nologo"/>
+      <arg value="/p:Configuration=${config}"/>
+      <arg value="Trilateration.sln"/>
+    </exec>
+  </target>
+  
+  <target name="clean">
+    <exec dir="${build.dir}"
+          failonerror="true"
+          executable="${msbuild.path}">
+      <arg value="/nologo"/>
+      <arg value="/p:Configuration=${config}"/>
+      <arg value="/t:Clean"/>
+      <arg value="Trilateration.sln"/>
+    </exec>
+  </target>
+ 
+  </project>
