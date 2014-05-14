@@ -8,6 +8,7 @@
 #ifndef __Position__
 #define __Position__
 
+#include "Public.h"
 #include <Eigen/Dense>
 #include <vector>
 
@@ -20,6 +21,7 @@ public:
     T m_pos;
     double m_distance;
 };
+
 typedef PosAndDistance<Pos2d> PosAndDistance2d;
 typedef PosAndDistance<Pos3d> PosAndDistance3d;
 

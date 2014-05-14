@@ -8,9 +8,10 @@
 #ifndef __Trilateration__
 #define __Trilateration__
 
+#include "Public.h"
 #include "Position.h"
 
-class Trilateration
+class EXPORT_API Trilateration
 {
 public:
     bool CalculateLocation2d(const PosAndDistance2dVec& beacons, Pos2d& location);
