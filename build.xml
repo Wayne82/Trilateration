@@ -5,7 +5,8 @@
 		 xmlns:unless="ant:unless">
 
 	<!-- Properties -->
-	<property name="ant.version.required" value="1.9.2"/>	
+	<property name="ant.version.required" value="1.9.2"/>
+	<property environment="env"/>
 	<property name="config" value="Debug"/>
 
 	<property file="./scripts/ant/${platform}.properties"/>		
