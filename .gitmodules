@@ -1,6 +1,3 @@
-[submodule "eigen"]
-	path = eigen
-	url = https://github.com/cryos/eigen.git
 [submodule "external/eigen"]
 	path = external/eigen
 	url = https://github.com/cryos/eigen.git
