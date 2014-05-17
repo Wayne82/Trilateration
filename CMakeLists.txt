@@ -12,11 +12,10 @@ else()
   set(T_LIB_TYPE SHARED)
 endif()
 
+include_directories(external/eigen)
+
 # Add cppunit to project.
 add_subdirectory(external)
 
-include_directories(external/eigen)
-
+# Add source
 add_subdirectory(source)
-
-
