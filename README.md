@@ -3,6 +3,11 @@ Trilateration
 The purposes of this project are,
 
 1. Experiment cross platform development, using CMake and Ant.
+   
+   Basic usage: (only support on windows platform now, until I get a mac/linux environment :) )
+   * Preparation projects: .\antwin.bat prep
+   * Build projects: .\antwin.bat build
+   * Delete builds: .\antwin.bat delete_build
 
 2. Implement simple locating algorithm by using Trilateration.
 
