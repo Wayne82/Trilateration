@@ -12,6 +12,9 @@
 #pragma warning(pop)
 #include "Trilateration.h"
 
+// Consider an epsilon as below.
+const double EPSILON = 1e-6;
+
 class TrilaterationTest : public CppUnit::TestFixture
 {
   CPPUNIT_TEST_SUITE( TrilaterationTest );
@@ -29,6 +32,8 @@ public:
    void Test3PositionHasApporxSolution();
    void Test4PositionHasExactSolution();
    void Test4PositionHasApporxSolution();
+
+   // TODO: add more unit tests.
 };
 
 // Registers the fixture into the 'registry'
@@ -49,33 +54,79 @@ TrilaterationTest::tearDown()
 void 
 TrilaterationTest::Test3PositionHasExactSolution()
 {
-   Trilateration worker;
-   worker;
-   CPPUNIT_FAIL( "not implemented" );
+    // workers and beacons
+    Trilateration worker;
+    PosAndDistance2dVec beacons;
+    Pos2d location;
+    
+    beacons.push_back(PosAndDistance2d(Pos2d(0, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, 1), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(2, 0), 1));
+    
+    worker.CalculateLocation2d(beacons, location);
+
+    // Expected location (1, 0)
+    CPPUNIT_ASSERT(std::fabs(location[0] - 1) < EPSILON);
+    CPPUNIT_ASSERT(std::fabs(location[1]) < EPSILON);
 }
 
 void 
 TrilaterationTest::Test3PositionHasApporxSolution()
 {
-   Trilateration worker;
-   worker;
-   CPPUNIT_FAIL( "not implemented" );
+    // workers and beacons
+    Trilateration worker;
+    PosAndDistance2dVec beacons;
+    Pos2d location;
+    
+    beacons.push_back(PosAndDistance2d(Pos2d(0, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, 1), 2));
+    beacons.push_back(PosAndDistance2d(Pos2d(2, 0), 1));
+    
+    worker.CalculateLocation2d(beacons, location);
+
+    // Expected location (1, -1.5)
+    CPPUNIT_ASSERT(std::fabs(location[0] - 1) < EPSILON);
+    CPPUNIT_ASSERT(std::fabs(location[1] - -1.5) < EPSILON);
 }
 
 void 
 TrilaterationTest::Test4PositionHasExactSolution()
 {
-   Trilateration worker;
-   worker; 
-   CPPUNIT_FAIL( "not implemented" );
+    // workers and beacons
+    Trilateration worker;
+    PosAndDistance2dVec beacons;
+    Pos2d location;
+    
+    beacons.push_back(PosAndDistance2d(Pos2d(0, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, 1), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(2, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, -1), 1));
+    
+    worker.CalculateLocation2d(beacons, location);
+
+    // Expected location (1, 0)
+    CPPUNIT_ASSERT(std::fabs(location[0] - 1) < EPSILON);
+    CPPUNIT_ASSERT(std::fabs(location[1]) < EPSILON);
 }
 
 void 
 TrilaterationTest::Test4PositionHasApporxSolution()
 {
-   Trilateration worker;
-   worker;
-   CPPUNIT_FAIL( "not implemented" );
+    // workers and beacons
+    Trilateration worker;
+    PosAndDistance2dVec beacons;
+    Pos2d location;
+    
+    beacons.push_back(PosAndDistance2d(Pos2d(0, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, 1), 1.5));
+    beacons.push_back(PosAndDistance2d(Pos2d(2, 0), 1));
+    beacons.push_back(PosAndDistance2d(Pos2d(1, -1), 1.5));
+    
+    worker.CalculateLocation2d(beacons, location);
+
+    // Expected location (1, 0)
+    CPPUNIT_ASSERT(std::fabs(location[0] - 1) < EPSILON);
+    CPPUNIT_ASSERT(std::fabs(location[1]) < EPSILON);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

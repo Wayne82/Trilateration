@@ -18,8 +18,14 @@ typedef Eigen::Vector3d Pos3d;
 template <class T>
 class PosAndDistance {
 public:
-    T m_pos;
-    double m_distance;
+   PosAndDistance()
+   { }
+   PosAndDistance(const T& pos, double dist)
+      : m_pos(pos)
+      , m_distance(dist)
+   {}
+   T m_pos;
+   double m_distance;
 };
 
 typedef PosAndDistance<Pos2d> PosAndDistance2d;
