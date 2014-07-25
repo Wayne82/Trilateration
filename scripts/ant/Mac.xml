@@ -1,0 +1,19 @@
+<project name="platform" default="build" basedir=".">
+
+  <target name="build" depends="prep">
+	<exec dir="${build.dir}"
+		  failonerror="true"
+		  executable="xcodebuild">
+	  <arg line="-configuration ${config}"/>
+	  <arg value="build"/>
+	</exec>
+  </target>
+  
+  <target name="clean">
+	<exec dir="${build.dir}"
+		  executable="xcodebuild">
+      <arg line="-configuration ${config}"/>
+	  <arg value="clean"/>
+	</exec>	
+  </target>
+</project>
