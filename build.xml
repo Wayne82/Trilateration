@@ -60,6 +60,29 @@
   
   <import file="./scripts/ant/${platform}.xml"/>
   
+  <target name="get_cores">  
+  	<!-- Support for Windows -->
+  	<condition property="cores.count" value="${env.NUMBER_OF_PROCESSORS}">
+  	  <os family="windows" />
+  	</condition>
+
+  	<!-- Support for Mac OS X -->
+  	<exec executable="sysctl" outputproperty="cores.count" osfamily="Mac">
+  	  <arg value="-n"/>
+  	  <arg value="hw.ncpu"/>
+  	</exec>
+  	<echo message="Number of cores: ${cores.count}"/>
+  </target>
+  
+  <target name="test" depends="build, get_cores" description="Tests build.">
+	<fail message="ctest.exe is not set. Is unit testing available on the '${platform}' platform?" unless="ctest.exe"/>
+	<exec dir="${build.dir}" executable="${ctest.exe}" if:set="ctest.exe" failonerror="true">
+		<arg value="-C"/>
+		<arg value="${config}"/>
+		<arg value="-j ${cores.count}"/>
+	</exec>
+  </target>
+
   <target name="delete_build"
 		  description="Removes all builds">
 	<delete dir="build"/>

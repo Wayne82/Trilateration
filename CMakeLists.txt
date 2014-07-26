@@ -26,5 +26,8 @@ include_directories(external/eigen)
 # Add cppunit to project.
 add_subdirectory(external)
 
+# Enable testing via CMake/CTest
+enable_testing()
+
 # Add source
 add_subdirectory(source)

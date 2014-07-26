@@ -9,6 +9,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 #include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/CompilerOutputter.h>
 #pragma warning(pop)
 #include "Trilateration.h"
 
@@ -123,7 +124,7 @@ TrilaterationTest::Test4PositionHasApporxSolution()
     beacons.push_back(PosAndDistance2d(Pos2d(1, -1), 1.5));
     
     worker.CalculateLocation2d(beacons, location);
-
+    
     // Expected location (1, 0)
     CPPUNIT_ASSERT(std::fabs(location[0] - 1) < EPSILON);
     CPPUNIT_ASSERT(std::fabs(location[1]) < EPSILON);
@@ -143,7 +144,7 @@ main(int argc, char* argv[])
   runner.addTest( suite );
 
   // Change the default outputter to a compiler error format outputter
-  //runner.setOutputter( new CppUnit::CompilerOutputter( &runner.result(), std::cerr ) );
+  runner.setOutputter( new CppUnit::CompilerOutputter( &runner.result(), std::cerr ) );
   // Run the tests.
   bool wasSucessful = runner.run();
 

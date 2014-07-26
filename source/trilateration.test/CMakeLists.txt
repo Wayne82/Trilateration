@@ -24,4 +24,12 @@ add_executable(${TARGET_NAME}
 	${SOURCE}
 )
 
+
+#
+# Register test.
+#
+add_test(NAME ${TARGET_NAME} 
+	WORKING_DIRECTORY ${NW_OUTPUT_DIR} 
+	COMMAND $<TARGET_FILE:${TARGET_NAME}> --build)
+
 target_link_libraries(${TARGET_NAME} cppunit Trilateration)
